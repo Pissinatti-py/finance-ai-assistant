@@ -24,7 +24,7 @@ user ──▶  │  START → check_cache ─(hit)─────────�
 ## Quickstart
 
 ```bash
-git clone <your-fork-url> finance-ai-assistant
+git clone `https://github.com/Pissinatti-py/finance-ai-assistant.git` finance-ai-assistant
 cd finance-ai-assistant
 cp .env.example .env            # then set ANTHROPIC_API_KEY and AI_API_KEY
 
