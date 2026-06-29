@@ -34,7 +34,12 @@ asyncio_mode = "auto"
 # per loop) — a session loop would leave connections attached to a stale loop.
 asyncio_default_fixture_loop_scope = "function"
 testpaths = ["tests"]
-markers = ["integration: requires the postgres+pgvector container running"]
+# Benchmarks are opt-in (slow, DB-heavy); run them with `pytest -m benchmark`.
+addopts = "-m 'not benchmark'"
+markers = [
+    "integration: requires the postgres+pgvector container running",
+    "benchmark: opt-in wall-clock smoke benchmarks (deselected by default)",
+]
 filterwarnings = [
     # Third-party: Starlette deprecates httpx for its TestClient (used by the
     # WebSocket route tests) in favour of httpx2. Not actionable here.
