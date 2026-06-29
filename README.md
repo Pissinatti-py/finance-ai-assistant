@@ -1,5 +1,7 @@
 # Finance AI Assistant
 
+[![CI](https://github.com/Pissinatti-py/finance-ai-assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/Pissinatti-py/finance-ai-assistant/actions/workflows/ci.yml)
+
 A standalone, self-hostable **personal-finance assistant**: ask about your own
 spending and income, project investments, and get plain explanations of finance
 concepts — in natural language. It is a compact but real showcase of a modern
