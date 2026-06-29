@@ -1,0 +1,51 @@
+[project]
+name = "finance-ai-assistant"
+version = "0.1.0"
+description = "Standalone AI personal-finance assistant: LangGraph agent with tools, RAG and a semantic cache."
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.138.1",
+    "uvicorn[standard]>=0.49.0",
+    "pydantic-settings>=2.14.2",
+    "sqlalchemy[asyncio]>=2.0.51",
+    "asyncpg>=0.31.0",
+    "langchain>=1.3.11",
+    "langchain-text-splitters>=0.3.0",
+    "langchain-anthropic>=0.3.0",
+    "langchain-core>=1.4.8",
+    "langgraph>=0.2.0",
+    "pgvector>=0.4.2",
+    "fastembed>=0.4.0",
+    "websockets>=13.0",
+    "rich>=13.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "httpx>=0.27",
+    "ruff>=0.9",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+# Function scope: the engine/db fixtures are per-test (fresh asyncpg connection
+# per loop) — a session loop would leave connections attached to a stale loop.
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+markers = ["integration: requires the postgres+pgvector container running"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+
+[tool.ruff.lint]
+# E/F: pyflakes+pycodestyle, I: isort, UP: pyupgrade, B: bug-prone patterns.
+select = ["E", "F", "I", "UP", "B"]
+# UP046: PEP695 generics would remove the module-level TypeVars that vector.py imports from base.py.
+ignore = ["UP046"]
+
+[tool.ruff.lint.flake8-bugbear]
+# FastAPI dependency-injection idiom: Depends()/Security() in argument defaults.
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Security"]
