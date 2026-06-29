@@ -35,6 +35,11 @@ asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
 testpaths = ["tests"]
 markers = ["integration: requires the postgres+pgvector container running"]
+filterwarnings = [
+    # Third-party: Starlette deprecates httpx for its TestClient (used by the
+    # WebSocket route tests) in favour of httpx2. Not actionable here.
+    "ignore:Using `httpx` with `starlette.testclient`",
+]
 
 [tool.ruff]
 target-version = "py312"
